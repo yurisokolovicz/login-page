@@ -13,19 +13,24 @@ const Login = props => {
 
     // The useEffect function below will run only if the enteredEmail or enteredPassword change.
     useEffect(() => {
-        setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6);
+        const identifier = setTimeout(() => {
+            console.log('Checking form validity');
+            setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6);
+        }, 700); // Check setFormisValid only after 500 miliseconds.
+
+        // Cleanup function
+        return () => {
+            console.log('CLEANUP');
+            clearTimeout(identifier);
+        };
     }, [enteredEmail, enteredPassword]);
 
     const emailChangeHandler = event => {
         setEnteredEmail(event.target.value);
-
-        // setFormIsValid(enteredEmail.includes('@') && enteredPassword.trim().length > 6);
     };
 
     const passwordChangeHandler = event => {
         setEnteredPassword(event.target.value);
-
-        // setFormIsValid(event.target.value.trim().length > 6 && enteredEmail.includes('@'));
     };
 
     const validateEmailHandler = () => {
