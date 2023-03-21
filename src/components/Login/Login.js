@@ -11,6 +11,14 @@ const Login = props => {
     const [passwordIsValid, setPasswordIsValid] = useState();
     const [formIsValid, setFormIsValid] = useState(false);
 
+    // // useEffect Summary
+    // useEffect(() => {
+    //     console.log('EFFECT RUNNING');
+    //     return () => {
+    //         console.log('EFFECT CLEANUP');
+    //     };
+    // }, []);
+
     // The useEffect function below will run only if the enteredEmail or enteredPassword change.
     useEffect(() => {
         const identifier = setTimeout(() => {
