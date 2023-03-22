@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer } from 'react';
-
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
@@ -26,23 +25,14 @@ const passwordReducer = (state, action) => {
 
 const Login = props => {
     const [formIsValid, setFormIsValid] = useState(false);
-
     const [emailState, dispatchEmail] = useReducer(emailReducer, { value: '', isValid: null });
-
     const [passwordState, dispatchPassword] = useReducer(passwordReducer, { value: '', isValid: null });
-
-    // useEffect Summary
-    useEffect(() => {
-        console.log('EFFECT RUNNING');
-        return () => {
-            console.log('EFFECT CLEANUP');
-        };
-    }, []);
 
     // Object de-structuring to pull out (extract) certain properties of objects
     const { isValid: emailIsValid } = emailState;
     const { isValid: passwordIsValid } = passwordState;
 
+    // Now it is setted to check the validity 1 time when the password requirement is not correct and one time after is correct.
     useEffect(() => {
         const identifier = setTimeout(() => {
             console.log('Checking form validity');
@@ -57,18 +47,13 @@ const Login = props => {
 
     const emailChangeHandler = event => {
         dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
-
-        //     setFormIsValid(event.target.value.includes('@') && passwordState.isValid);
     };
 
     const passwordChangeHandler = event => {
         dispatchPassword({ type: 'USER_INPUT', val: event.target.value });
-
-        //     setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
     };
 
     const validateEmailHandler = () => {
-        // setEmailIsValid(emailState.isValid);
         dispatchEmail({ type: 'INPUT_BLUR' });
     };
 
